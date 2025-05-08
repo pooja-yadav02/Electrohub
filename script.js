@@ -170,13 +170,68 @@ window.addEventListener('scroll', changeNavOnScroll);
 // Initial check in case page loads scrolled down
 changeNavOnScroll();
 
-document.getElementById('signInForm').addEventListener('submit', function (e) {
-  e.preventDefault(); // Prevent form from refreshing the page
-  // Perform sign-in logic here (e.g., validate credentials)
-  alert('Signed in successfully!');
-  // Close the modal
-  const modalElement = document.getElementById('signInModal');
-  const signInModal = bootstrap.Modal.getOrCreateInstance(modalElement); // Ensures the modal is initialized
-  signInModal.hide();
-  console.log(signInModal); // Check if this logs the modal instance
+
+
+// Handle Sign Up
+function handleSignup() {
+  const name = document.getElementById("signupName").value.trim();
+  const email = document.getElementById("signupEmail").value.trim();
+  const password = document.getElementById("signupPassword").value.trim();
+  const phone = document.getElementById("signupPhone").value.trim();
+  const address = document.getElementById("signupAddress").value.trim();
+
+  if (!name || !email || !password || !phone || !address) {
+    alert("All fields are required!");
+    return;
+  }
+
+  const userData = { name, email, password, phone, address };
+  localStorage.setItem("userData", JSON.stringify(userData));
+  alert("Signup successful!");
+  closeModal("signupModal");
+}
+
+// Handle Sign In
+function handleSignin() {
+  const email = document.getElementById("signinEmail").value.trim();
+  const password = document.getElementById("signinPassword").value.trim();
+
+  if (!email || !password) {
+    alert("Both email and password are required!");
+    return;
+  }
+
+  const storedData = JSON.parse(localStorage.getItem("userData"));
+
+  if (storedData && storedData.email === email && storedData.password === password) {
+    alert("Sign in successful!");
+  } else {
+    alert("Invalid email or password.");
+  }
+
+  closeModal("signinModal");
+}
+
+document.querySelector('form').addEventListener('submit', function (e) {
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
+
+  if (!email.includes('@')) {
+    alert('Please enter a valid email address.');
+    e.preventDefault();
+  }
+
+  if (password.length < 6) {
+    alert('Password must be at least 6 characters long.');
+    e.preventDefault();
+  }
 });
+
+function openModal(id) {
+  document.getElementById(id).style.display = "flex";
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
