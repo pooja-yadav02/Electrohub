@@ -48,9 +48,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#hero"
-                >Home</a
-              >
+              <a class="nav-link active" aria-current="page" href="#hero">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#products">Products</a>
@@ -62,749 +60,766 @@
               <a class="nav-link" href="#about">About</a>
             </li>
             <li class="nav-item">
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="#footer">Contact</a>
             </li>
-            <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
+            <li class="nav-item">
+              <button class="btn btn-primary text-white me-3" onclick="openModal('signupModal')">Sign Up</button>
+            </li>
+            
           </ul>
         </div>
       </div>
     </nav>
-    <!-- Sign In Modal -->
-<div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="signInForm">
-          <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter your email" required />
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter your password" required />
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Sign In</button>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('signupModal')">&times;</span>
+        <h2>Sign Up</h2>
+        <form action="save.php" method="post">
+          <input type="text" name="name" id="signupName" placeholder="Name" required />
+          <input type="email" name="email" id="signupEmail" placeholder="Email" required />
+          <input type="password" name="password" id="signupPassword" placeholder="Password" required />
+          <input type="text" name="phone" id="signupPhone" placeholder="Phone Number" required />
+          <input type="text" name="address" id="signupAddress" placeholder="Address" required />
+          <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
+        <p>
+          Already have an account? <a onclick="openModal('signinModal')">Sign In</a>
+        </p>
       </div>
     </div>
-  </div>
-</div>
-<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
+
+    <!-- Signin Modal -->
+    <div id="signinModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('signinModal')">&times;</span>
+        <h2>Sign In</h2>
+        <input type="email" id="signinEmail" placeholder="Email" required />
+        <input type="password" id="signinPassword" placeholder="Password" required />
+        <button class="btn btn-primary" onclick="handleSignin()">Sign In</button>
+      </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+      <div class="cart-model">
+        <span class="close" onclick="closeModal('cartModal')">&times;</span>
+        <h2>Your Cart</h2>
+        <div id="cartItems">
+          <!-- Cart items will be dynamically added here -->
+        </div>
+        <p id="emptyCartMessage">Your cart is empty.</p>
+        <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+      </div>
+    </div>
 
     <section id="hero">
-      <div class="container">
-        <h1>Discover the Future of Tech</h1>
-        <p>
-          Explore our curated selection of the latest and greatest electronic
-          gadgets, from smartphones to smart home devices.
-        </p>
-        <a href="#products" class="btn btn-primary btn-lg">Explore Products</a>
-      </div>
-    </section>
-
-    <section id="products" class="section-padding">
-      <div class="container">
-        <h2 class="section-heading">Featured Products</h2>
-        <div class="row g-4">
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1709528922659-8f86b0f02b9b?q=80&w=1526&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Smartphone"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">Apple iPhone 16 pro max </h5>
-                  <p class="card-text">
-                    256GB Storage, 6.7 inch display with 5G connectivity,
-                    48MP camera, and A17 Bionic chip (Natural ,titanium )
-                  </p>
-                  <p class="price">&#8377;150000
-                  </p>
+        <div class="container">
+          <h1>Discover the Future of Tech</h1>
+          <p>
+            Explore our curated selection of the latest and greatest electronic
+            gadgets, from smartphones to smart home devices.
+          </p>
+          <a href="#products" class="btn btn-primary btn-lg">Explore Products</a>
+        </div>
+      </section>
+  
+      <section id="products" class="section-padding">
+        <div class="container">
+          <h2 class="section-heading">Featured Products</h2>
+          <div class="row g-4">
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1709528922659-8f86b0f02b9b?q=80&w=1526&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Smartphone"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">Apple iPhone 16 pro max </h5>
+                    <p class="card-text">
+                      256GB Storage, 6.7 inch display with 5G connectivity,
+                      48MP camera, and A17 Bionic chip (Natural ,titanium )
+                    </p>
+                    <p class="price">&#8377;150000
+                    </p>
+                  </div>
+                  <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
                 </div>
-                <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Laptop"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">ASUS Expertbook </h5>
-                  <p class="card-text">
-                    p1 intel Core i3 13th Gen 1315U- (8GB/512GB SSD/Windows 11 Home)
-                    P1503CVA-S70501WS thin and light laptop (Black)
-                  </p>
-                  <p class="price">&#8377;
-                    10099</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Laptop"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">ASUS Expertbook </h5>
+                    <p class="card-text">
+                      p1 intel Core i3 13th Gen 1315U- (8GB/512GB SSD/Windows 11 Home)
+                      P1503CVA-S70501WS thin and light laptop (Black)
+                    </p>
+                    <p class="price">&#8377;
+                      10099</p>
+                  </div>
+                  <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
                 </div>
-                <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1617625802912-cde586faf331?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Smartwatch"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">Apple Watch Ultra </h5>
-                  <p class="card-text">
-                    2Gps + Cellular 49mm Black Titanium Case with Black
-                    with call function , fitness & outdoor 
-                  </p>
-                  <p class="price">&#8377;
-                    2099</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1617625802912-cde586faf331?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Smartwatch"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">Apple Watch Ultra </h5>
+                    <p class="card-text">
+                      2Gps + Cellular 49mm Black Titanium Case with Black
+                      with call function , fitness & outdoor 
+                    </p>
+                    <p class="price">&#8377;
+                      2099</p>
+                  </div>
+                  <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
                 </div>
-                <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1674658556545-f18d4080ab6c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Headphones"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">SONOS</h5>
-                  <p class="card-text">
-                    Wireless Over Ear Headphones with Active Noise Cancellation
-                    (Black , On the ear )
-
-                  </p>
-                  <p class="price">&#8377;
-                    1009</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1674658556545-f18d4080ab6c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Headphones"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">SONOS</h5>
+                    <p class="card-text">
+                      Wireless Over Ear Headphones with Active Noise Cancellation
+                      (Black , On the ear )
+  
+                    </p>
+                    <p class="price">&#8377;
+                      1009</p>
+                  </div>
+                  <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
                 </div>
-                <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1621958054700-7af166501105?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTB8fENhbWVyYSUyMGRzbHIlMjBwcm9kdWN0fGVufDB8fDB8fHww"
-                class="card-img-top"
-                alt="Camera"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">SONY Alpha</h5>
-                  <p class="card-text">
-                    9M3 Mirrorless Camera with 24.2MP sensor and 4K video recording 
-                    (Black)
-                  </p>
-                  <p class="price">&#8377;
-                    99900</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1621958054700-7af166501105?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Camera"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">SONY Alpha</h5>
+                    <p class="card-text">
+                      9M3 Mirrorless Camera with 24.2MP sensor and 4K video recording 
+                      (Black)
+                    </p>
+                    <p class="price">&#8377;
+                      99900</p>
+                  </div>
+                  <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
                 </div>
-                <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1613141412501-9012977f1969?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Gaming Mouse"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">Gaming Mouse X1</h5>
-                  <p class="card-text">
-                    High-precision gaming mouse with customizable RGB lighting.
-                  </p>
-                  <p class="price">&#8377;
-                    679</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1613141412501-9012977f1969?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Gaming Mouse"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">Gaming Mouse X1</h5>
+                    <p class="card-text">
+                      High-precision gaming mouse with customizable RGB lighting.
+                    </p>
+                    <p class="price">&#8377;
+                      679</p>
+                  </div>
+                  <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
                 </div>
-                <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1666771410003-8437c4781d49?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Monitor"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">DELL 4K Monitor</h5>
-                  <p class="card-text">
-                    4K Ultra HD LED Backlit IPS panel with HDMI 2.1 Mini DisplayPort.
-                    2.1,2x Thunderbolt 4, 5x USB Type-A ,RJ45 Connector,
-                    2x USB Type-c Ultrasharp Monitor (U3224kb), Black 
-                  </p>
-                  <p class="price">&#8377;
-                    34500</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1666771410003-8437c4781d49?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Monitor"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">DELL 4K Monitor</h5>
+                    <p class="card-text">
+                      4K Ultra HD LED Backlit IPS panel with HDMI 2.1 Mini DisplayPort.
+                      2.1,2x Thunderbolt 4, 5x USB Type-A ,RJ45 Connector,
+                      2x USB Type-c Ultrasharp Monitor (U3224kb), Black 
+                    </p>
+                    <p class="price">&#8377;
+                      34500</p>
+                  </div>
+                  <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
                 </div>
-                <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="VR Headset"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">Horizen VR Headset</h5>
-                  <p class="card-text">
-                    2.19 GHz AM2+ Virtual Reality Headset | 4K Display|
-                    3D Glassses Headset |VR set Box | Enjoying Gmaing Processor 
-                    (white,pink)
-                  </p>
-                  <p class="price">&#8377;
-                    5099</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="VR Headset"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">Horizen VR Headset</h5>
+                    <p class="card-text">
+                      2.19 GHz AM2+ Virtual Reality Headset | 4K Display|
+                      3D Glassses Headset |VR set Box | Enjoying Gmaing Processor 
+                      (white,pink)
+                    </p>
+                    <p class="price">&#8377;
+                      5099</p>
+                  </div>
+                  <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
                 </div>
-                <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1609895314390-cb64c186466a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fEUlMjBSZWFkZXJ8ZW58MHx8MHx8fDA%3D"
-                class="card-img-top"
-                alt="E-Reader"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">KOBO e-Reader</h5>
-                  <p class="card-text">
-                    clara Colour , 6" Glare free  E Ink display with adjustable front light.
-                    (white , 16GB)
-                  </p>
-                  <p class="price">&#8377;
-                    12229</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1609895314390-cb64c186466a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="E-Reader"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">KOBO e-Reader</h5>
+                    <p class="card-text">
+                      clara Colour , 6" Glare free  E Ink display with adjustable front light.
+                      (white , 16GB)
+                    </p>
+                    <p class="price">&#8377;
+                      12229</p>
+                  </div>
+                  <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
                 </div>
-                <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1588131153911-a4ea5189fe19?q=80&w=1481&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Bluetooth Speaker"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">ZETTTECCH </h5>
-                  <p class="card-text">
-                    4D Mini Bluetooth Speaker for Rich Sound 3.3W Bluetooth Home Speaker
-                    (black)
-                  </p>
-                  <p class="price">&#8377;
-                      2000</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1588131153911-a4ea5189fe19?q=80&w=1481&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Bluetooth Speaker"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">ZETTTECCH </h5>
+                    <p class="card-text">
+                      4D Mini Bluetooth Speaker for Rich Sound 3.3W Bluetooth Home Speaker
+                      (black)
+                    </p>
+                    <p class="price">&#8377;
+                        2000</p>
+                  </div>
+                  <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
                 </div>
-                <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1657357092389-49b1b254c1ac?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Webcam"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">MAXHUB UC P20 </h5>
-                  <p class="card-text">
-                    8.52 HD Webcam Ethernet ,USB Connectivity (Black)
-                                    </p>
-                  <p class="price">&#8377;
-                  6789</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1657357092389-49b1b254c1ac?q=80&w=1530&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Webcam"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">MAXHUB UC P20 </h5>
+                    <p class="card-text">
+                      8.52 HD Webcam Ethernet ,USB Connectivity (Black)
+                                      </p>
+                    <p class="price">&#8377;
+                    6789</p>
+                  </div>
+                  <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
                 </div>
-                <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1739742473328-eddb0e0fd3a0?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="External SSD"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">EVM 2 TB External SSD</h5>
-                  <p class="card-text">
-                    Ultra-fast external SSD with 2TB storage capacity.
-                    (Black, Mobile Backup Enabled)
-                  </p>
-                  <p class="price">&#8377;
-                    24449</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1739742473328-eddb0e0fd3a0?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="External SSD"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">EVM 2 TB External SSD</h5>
+                    <p class="card-text">
+                      Ultra-fast external SSD with 2TB storage capacity.
+                      (Black, Mobile Backup Enabled)
+                    </p>
+                    <p class="price">&#8377;
+                      24449</p>
+                  </div>
+                  <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
                 </div>
-                <a href="#" class="btn btn-secondary mt-auto">Buy Now</a>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="new-arrivals" class="section-padding">
-      <div class="container">
-        <h2 class="section-heading">New Arrivals</h2>
-        <div class="row g-4">
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1636614178501-e03f25a87516?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Tablet"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">Realme Pad 2 Lite </h5>
-                  <p class="card-text">
-                    8GB RAM 128GB Storage, 11.1 inch display with 4g tablet 
-                    , 7100 mAh battery (white )
-                  </p>
-                  <p class="price">&#8377;
-                    20009</p>
+      </section>
+  
+      <section id="new-arrivals" class="section-padding">
+        <div class="container">
+          <h2 class="section-heading">New Arrivals</h2>
+          <div class="row g-4">
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1636614178501-e03f25a87516?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Tablet"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">Realme Pad 2 Lite</h5>
+                    <p class="card-text">
+                      8GB RAM 128GB Storage, 11.1 inch display with 4g tablet, 7100 mAh battery (white)
+                    </p>
+                    <p class="price">&#8377;20009</p>
+                  </div>
+                  <a href="#" class="btn btn-primary mt-auto" onclick="addToCart('Product Name', 1500)">Add to Cart</a>
                 </div>
-                <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1640826808046-6d4d4faa30c8?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Smart Speaker"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">Soundcore By Anker </h5>
-                  <p class="card-text">
-                    Glow with Mini 8W with 360 Sound ,12hrs IP67 ,Light Show ,Connect over 100 
-                    speaker with Google Assistant Smart Speaker (Black)
-                  </p>
-                  <p class="price">&#8377;
-                    78909</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1640826808046-6d4d4faa30c8?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Smart Speaker"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">Soundcore By Anker </h5>
+                    <p class="card-text">
+                      Glow with Mini 8W with 360 Sound ,12hrs IP67 ,Light Show ,Connect over 100 
+                      speaker with Google Assistant Smart Speaker (Black)
+                    </p>
+                    <p class="price">&#8377;
+                      78909</p>
+                  </div>
+                  <a href="#" class="btn btn-primary mt-auto" onclick="addToCart('Product Name', 1500)">Add to Cart</a>
                 </div>
-                <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1612801799511-1ee0705f3212?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Gaming Console"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">EXtreme Gamestick Console</h5>
-                  <p class="card-text">
-                  Viedo game built in RETRO Games Wireless Controller. 128 GB with Cadilac and dinosaur, tekken 3, mario contra 
-                  other Retro Game (White)
-                  </p>
-                  <p class="price">&#8377;
-                    78499</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1612801799511-1ee0705f3212?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Gaming Console"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">EXtreme Gamestick Console</h5>
+                    <p class="card-text">
+                    Viedo game built in RETRO Games Wireless Controller. 128 GB with Cadilac and dinosaur, tekken 3, mario contra 
+                    other Retro Game (White)
+                    </p>
+                    <p class="price">&#8377;
+                      78499</p>
+                  </div>
+                  <a href="#" class="btn btn-primary mt-auto" onclick="addToCart('Product Name', 1500)">Add to Cart</a>
                 </div>
-                <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1543235074-5e7ce5446433?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Drone"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">BYGO Drone</h5>
-                  <p class="card-text">
-                    4k HD Camera One key Start Emergency Stop Headles Gps mode Drone 
-                  </p>
-                  <p class="price">&#8377;
-                    119009</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1543235074-5e7ce5446433?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Drone"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">BYGO Drone</h5>
+                    <p class="card-text">
+                      4k HD Camera One key Start Emergency Stop Headles Gps mode Drone 
+                    </p>
+                    <p class="price">&#8377;
+                      119009</p>
+                  </div>
+                  <a href="#" class="btn btn-primary mt-auto" onclick="addToCart('Product Name', 1500)">Add to Cart</a>
                 </div>
-                <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1636569608385-58efc32690ea?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Smart Thermostat"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">Smart Thermostat E</h5>
-                  <p class="card-text">
-                    Save energy and control your home temperature remotely.
-                  </p>
-                  <p class="price">&#8377;
-                    78169</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1636569608385-58efc32690ea?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Smart Thermostat"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">Smart Thermostat E</h5>
+                    <p class="card-text">
+                      Save energy and control your home temperature remotely.
+                    </p>
+                    <p class="price">&#8377;
+                      78169</p>
+                  </div>
+                  <a href="#" class="btn btn-primary mt-auto" onclick="addToCart('Product Name', 1500)">Add to Cart</a>
                 </div>
-                <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?q=80&w=1589&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Wireless Earbuds"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">boAt </h5>
-                  
-                  <p class="card-text">
-                    Airdopes 161/163 with ASAP charge &40 HRS playack bluetooth headset
-                    (pearl White ,True wireless)
-                  </p>
-                  <p class="price">&#8377; 1899</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?q=80&w=1589&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Wireless Earbuds"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">boAt </h5>
+                    
+                    <p class="card-text">
+                      Airdopes 161/163 with ASAP charge &40 HRS playack bluetooth headset
+                      (pearl White ,True wireless)
+                    </p>
+                    <p class="price">&#8377; 1899</p>
+                  </div>
+                  <a href="#" class="btn btn-primary mt-auto" onclick="addToCart('Product Name', 1500)">Add to Cart</a>
                 </div>
-                <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1603618090561-412154b4bd1b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Robot Vacuum"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">Euereka Forbes Smartclean</h5>
-                  <p class="card-text">
-                    Home Mopping NUO Robotic Floor cleaner (wifi connectivity)(Black)
-                  </p>
-                  <p class="price">&#8377;
-                    20999</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1603618090561-412154b4bd1b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Robot Vacuum"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">Euereka Forbes Smartclean</h5>
+                    <p class="card-text">
+                      Home Mopping NUO Robotic Floor cleaner (wifi connectivity)(Black)
+                    </p>
+                    <p class="price">&#8377;
+                      20999</p>
+                  </div>
+                  <a href="#" class="btn btn-primary mt-auto" onclick="addToCart('Product Name', 1500)">Add to Cart</a>
                 </div>
-                <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1650682009477-52fd77302b78?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Smart Display"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">Samsung Galaxy Tab A7 lite </h5>
-                  <p class="card-text">
-                    Control your smart home, watch videos, and more.
-                  </p>
-                  <p class="price">&#8377;
-                    100029</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1650682009477-52fd77302b78?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Smart Display"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">Samsung Galaxy Tab A7 lite </h5>
+                    <p class="card-text">
+                      Control your smart home, watch videos, and more.
+                    </p>
+                    <p class="price">&#8377;
+                      100029</p>
+                  </div>
+                  <a href="#" class="btn btn-primary mt-auto" onclick="addToCart('Product Name', 1500)">Add to Cart</a>
                 </div>
-                <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1528395874238-34ebe249b3f2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Projector"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">Pocket Projector</h5>
-                  <p class="card-text">
-                    Portable mini projector for movies on the go.
-                  </p>
-                  <p class="price">&#8377;
-                    2949</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1528395874238-34ebe249b3f2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Projector"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">Pocket Projector</h5>
+                    <p class="card-text">
+                      Portable mini projector for movies on the go.
+                    </p>
+                    <p class="price">&#8377;
+                      2949</p>
+                  </div>
+                  <a href="#" class="btn btn-primary mt-auto" onclick="addToCart('Product Name', 1500)">Add to Cart</a>
                 </div>
-                <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1557935728-e6d1eaabe558?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Fitness Tracker"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">FitTrack Band 5</h5>
-                  <p class="card-text">
-                    Monitor your activity, sleep, and heart rate 24/7.
-                  </p>
-                  <p class="price">&#8377;
-                    3899</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1557935728-e6d1eaabe558?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Fitness Tracker"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">FitTrack Band 5</h5>
+                    <p class="card-text">
+                      Monitor your activity, sleep, and heart rate 24/7.
+                    </p>
+                    <p class="price">&#8377;
+                      3899</p>
+                  </div>
+                  <a href="#" class="btn btn-primary mt-auto" onclick="addToCart('Product Name', 1500)">Add to Cart</a>
                 </div>
-                <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1604942177421-df466b7410f6?q=80&w=1401&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Action Camera"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">ActionCam Go</h5>
-                  <p class="card-text">
-                    Rugged and waterproof action camera for adventures.
-                  </p>
-                  <p class="price">&#8377;
-                    27879</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1604942177421-df466b7410f6?q=80&w=1401&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Action Camera"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">ActionCam Go</h5>
+                    <p class="card-text">
+                      Rugged and waterproof action camera for adventures.
+                    </p>
+                    <p class="price">&#8377;
+                      27879</p>
+                  </div>
+                  <a href="#" class="btn btn-primary mt-auto" onclick="addToCart('Product Name', 1500)">Add to Cart</a>
                 </div>
-                <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-6 d-flex">
-            <div class="product-card w-100">
-              <img
-                src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                class="card-img-top"
-                alt="Smart Lock"
-              />
-              <div class="card-body">
-                <div>
-                  <h5 class="card-title">Secure Smart Lock</h5>
-                  <p class="card-text">
-                    Keyless entry and remote access control for your home.
-                  </p>
-                  <p class="price">&#8377;
-                    789199</p>
+            <div class="col-lg-3 col-md-6 d-flex">
+              <div class="product-card w-100">
+                <img
+                  src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="card-img-top"
+                  alt="Smart Lock"
+                />
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title">Secure Smart Lock</h5>
+                    <p class="card-text">
+                      Keyless entry and remote access control for your home.
+                    </p>
+                    <p class="price">&#8377;
+                      789199</p>
+                  </div>
+                  <a href="#" class="btn btn-primary mt-auto" onclick="addToCart('Product Name', 1500)">Add to Cart</a>
                 </div>
-                <a class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="categories" class="section-padding">
-      <div class="container">
-        <h2 class="section-heading">Shop by Category</h2>
-        <div class="row g-4">
-          <div class="col-lg-2 col-md-4 col-6 d-flex">
-            <div class="category-card w-100">
-              <a href="#">
-                <i class="fas fa-mobile-alt"></i>
-                <h5>Smartphones</h5>
-              </a>
+      </section>
+  
+      <section id="categories" class="section-padding">
+        <div class="container">
+          <h2 class="section-heading">Shop by Category</h2>
+          <div class="row g-4">
+            <div class="col-lg-2 col-md-4 col-6 d-flex">
+              <div class="category-card w-100">
+                <a href="#">
+                  <i class="fas fa-mobile-alt"></i>
+                  <h5>Smartphones</h5>
+                </a>
+              </div>
             </div>
-          </div>
-          <div class="col-lg-2 col-md-4 col-6 d-flex">
-            <div class="category-card w-100">
-              <a href="#">
-                <i class="fas fa-laptop"></i>
-                <h5>Laptops</h5>
-              </a>
+            <div class="col-lg-2 col-md-4 col-6 d-flex">
+              <div class="category-card w-100">
+                <a href="#">
+                  <i class="fas fa-laptop"></i>
+                  <h5>Laptops</h5>
+                </a>
+              </div>
             </div>
-          </div>
-          <div class="col-lg-2 col-md-4 col-6 d-flex">
-            <div class="category-card w-100">
-              <a href="#">
-                <i class="fas fa-headphones"></i>
-                <h5>Audio</h5>
-              </a>
+            <div class="col-lg-2 col-md-4 col-6 d-flex">
+              <div class="category-card w-100">
+                <a href="#">
+                  <i class="fas fa-headphones"></i>
+                  <h5>Audio</h5>
+                </a>
+              </div>
             </div>
-          </div>
-          <div class="col-lg-2 col-md-4 col-6 d-flex">
-            <div class="category-card w-100">
-              <a href="#">
-                <i class="fas fa-stopwatch"></i>
-                <h5>Wearables</h5>
-              </a>
+            <div class="col-lg-2 col-md-4 col-6 d-flex">
+              <div class="category-card w-100">
+                <a href="#">
+                  <i class="fas fa-stopwatch"></i>
+                  <h5>Wearables</h5>
+                </a>
+              </div>
             </div>
-          </div>
-         
-          <div class="col-lg-2 col-md-4 col-6 d-flex">
-            <div class="category-card w-100">
-              <a href="#">
-                <i class="fas fa-keyboard"></i>
-                <h5>Accessories</h5>
-              </a>
+           
+            <div class="col-lg-2 col-md-4 col-6 d-flex">
+              <div class="category-card w-100">
+                <a href="#">
+                  <i class="fas fa-keyboard"></i>
+                  <h5>Accessories</h5>
+                </a>
+              </div>
             </div>
-          </div>
-          <div class="col-lg-2 col-md-4 col-6 d-flex">
-            <div class="category-card w-100">
-              <a href="#">
-                <i class="fas fa-home"></i>
-                <h5>Smart Home</h5>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section-padding">
-      <div class="container">
-        <div class="row align-items-center g-5">
-          <div class="col-lg-6">
-            <img
-              src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=1501&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="About ElectroHub"
-            />
-          </div>
-          <div class="col-lg-6">
-            <h2 class="section-heading text-start">About ElectroHub</h2>
-            <style>
-              #about .section-heading::after {
-                left: 0;
-                transform: translateX(0);
-              }
-            </style>
-            <p>
-              ElectroHub was founded with a passion for technology and a mission
-              to bring the latest electronic innovations directly to you. We
-              believe in quality, affordability, and exceptional customer
-              service.
-            </p>
-            <p>
-              Our curated selection features top brands and cutting-edge
-              gadgets, ensuring you always have access to the best tech on the
-              market. We're more than just a retailer; we're your trusted
-              partner in the world of electronics.
-            </p>
-            <a href="#" class="btn btn-primary mt-3">Learn More</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="testimonials" class="section-padding">
-      <div class="container">
-        <h2 class="section-heading">What Our Customers Say</h2>
-        <div class="testimonial-slider">
-          <div class="slider-content"></div>
-          <div class="slider-controls">
-            <button id="prevBtn" aria-label="Previous Testimonial">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button id="nextBtn" aria-label="Next Testimonial">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer id="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-            <h5 style="color: var(--primary-color)">
-              <i class="fas fa-bolt"></i> ElectroHub
-            </h5>
-            <p>
-              Your one-stop shop for the latest electronics and gadgets. Quality
-              products, great prices.
-            </p>
-            <p>
-              <i class="fas fa-map-marker-alt me-2"></i>123 Tech Street,Near City Centre Mall koramagnala ,Bangalore-560034 
-            </p>
-            <p><i class="fas fa-phone me-2"></i>+1 234 567 890</p>
-            <p><i class="fas fa-envelope me-2"></i>support@electrohub.com</p>
-          </div>
-
-          <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-            <h5>Quick Links</h5>
-            <ul> 
-              <li><a href="#hero">Home</a></li>
-              <li><a href="#products">Products</a></li>
-              <li><a href="#categories">Categories</a></li>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#">FAQs</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <h5>Categories</h5>
-            <ul>
-              <li><a href="#">Smartphones</a></li>
-              <li><a href="#">Laptops</a></li>
-              <li><a href="#">Smartwatches</a></li>
-              <li><a href="#">Audio Devices</a></li>
-              <li><a href="#">Accessories</a></li>
-              <li><a href="#">Smart Home</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <h5>Follow Us</h5>
-            <div class="social-icons">
-              <a href="#" aria-label="Facebook"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a href="#" aria-label="Twitter"
-                ><i class="fab fa-twitter"></i
-              ></a>
-              <a href="#" aria-label="Instagram"
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a href="#" aria-label="LinkedIn"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
-              <a href="#" aria-label="Youtube"
-                ><i class="fab fa-youtube"></i
-              ></a>
+            <div class="col-lg-2 col-md-4 col-6 d-flex">
+              <div class="category-card w-100">
+                <a href="#">
+                  <i class="fas fa-home"></i>
+                  <h5>Smart Home</h5>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="footer-bottom">
-          © <span id="currentYear"></span> ElectroHub. All Rights Reserved. 
+      </section>
+  
+      <section id="about" class="section-padding">
+        <div class="container">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+              <img
+                src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=1501&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="About ElectroHub"
+              />
+            </div>
+            <div class="col-lg-6">
+              <h2 class="section-heading text-start">About ElectroHub</h2>
+              <style>
+                #about .section-heading::after {
+                  left: 0;
+                  transform: translateX(0);
+                }
+              </style>
+              <p>
+                ElectroHub was founded with a passion for technology and a mission
+                to bring the latest electronic innovations directly to you. We
+                believe in quality, affordability, and exceptional customer
+                service.
+              </p>
+              <p>
+                Our curated selection features top brands and cutting-edge
+                gadgets, ensuring you always have access to the best tech on the
+                market. We're more than just a retailer; we're your trusted
+                partner in the world of electronics.
+              </p>
+              <a href="#" class="btn btn-primary mt-3">Learn More</a>
+            </div>
+          </div>
         </div>
-        <p style="text-align: center; color: cyan;"> Created By Pooja Yadav </p>
-      </div>
-    </footer>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <script src="script.js"></script>
-  </body>
-</html>
+      </section>
+  
+      <section id="testimonials" class="section-padding">
+        <div class="container">
+          <h2 class="section-heading">What Our Customers Say</h2>
+          <div class="testimonial-slider">
+            <div class="slider-content"></div>
+            <div class="slider-controls">
+              <button id="prevBtn" aria-label="Previous Testimonial">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button id="nextBtn" aria-label="Next Testimonial">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <footer id="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+              <h5 style="color: var(--primary-color)">
+                <i class="fas fa-bolt"></i> ElectroHub
+              </h5>
+              <p>
+                Your one-stop shop for the latest electronics and gadgets. Quality
+                products, great prices.
+              </p>
+              <p>
+                <i class="fas fa-map-marker-alt me-2"></i>123 Tech Street,Near City Centre Mall koramagnala ,Bangalore-560034 
+              </p>
+              <p><i class="fas fa-phone me-2"></i>+1 234 567 890</p>
+              <p><i class="fas fa-envelope me-2"></i>support@electrohub.com</p>
+            </div>
+  
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+              <h5>Quick Links</h5>
+              <ul> 
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+              </ul>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+              <h5>Categories</h5>
+              <ul>
+                <li><a href="#">Smartphones</a></li>
+                <li><a href="#">Laptops</a></li>
+                <li><a href="#">Smartwatches</a></li>
+                <li><a href="#">Audio Devices</a></li>
+                <li><a href="#">Accessories</a></li>
+                <li><a href="#">Smart Home</a></li>
+              </ul>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+              <h5>Follow Us</h5>
+              <div class="social-icons">
+                <a href="#" aria-label="Facebook"
+                  ><i class="fab fa-facebook-f"></i
+                ></a>
+                <a href="#" aria-label="Twitter"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+                <a href="#" aria-label="Instagram"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+                <a href="#" aria-label="LinkedIn"
+                  ><i class="fab fa-linkedin-in"></i
+                ></a>
+                <a href="#" aria-label="Youtube"
+                  ><i class="fab fa-youtube"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+  
+          <div class="footer-bottom">
+            © <span id="currentYear"></span> ElectroHub. All Rights Reserved. 
+          </div>
+          <p style="text-align: center; color: cyan;"> Created By Pooja Yadav </p>
+        </div>
+      </footer>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"
+      ></script>
+      <script src="script.js"></script>
+    </body>
+  </html>
